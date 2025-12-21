@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
     <header>
         <h1>The Braid Loft</h1> 
         <nav>
@@ -23,44 +22,69 @@
 
     <main>
         
-        <section id="booking-cta" class="section-padding">
-            <h2>Ready for Your Next Look?</h2>
-            <p class="section-subtitle">Use our integrated system to instantly check availability and book your appointment.</p>
+   <section id="booking-cta" class="section-padding">
+    <h2>Ready for Your Next Look?</h2>
+    <p class="section-subtitle">Enter your details below to request an appointment.</p>
+    
+    <div class="booking-widget-area">
+        <form id="booking-form" class="contact-form">
+            <label for="booking-name">Full Name:</label>
+            <input type="text" id="booking-name" name="name" placeholder="Enter your name" required>
+
+            <label for="booking-phone">Phone Number:</label>
+            <input type="tel" id="booking-phone" name="phone" placeholder="(555) 555-5555" required>
+
+            <label for="service-type">Service Interested In:</label>
+            <select id="service-type" name="service">
+                <option value="knotless">Knotless Braids</option>
+                <option value="box-braids">Box Braids</option>
+                <option value="cornrows">Cornrows</option>
+                <option value="other">Other / Consultation</option>
+            </select>
+
+            <label for="booking-date">Preferred Date:</label>
+            <input type="date" id="booking-date" name="date" required>
+
+            <button type="submit" class="button-primary" style="margin-top: 20px;">Submit Booking Request</button>
+        </form>
+
+        <div id="booking-success" style="display:none; background-color: #d4edda; color: #155724; padding: 20px; border-radius: 5px; border: 1px solid #c3e6cb; margin-top: 20px;">
+            <h4>Request Received!</h4>
+            <p>Thanks for choosing The Braid Loft. We have collected your details and will call you shortly to confirm your time.</p>
+        </div>
+    </div>
+</section>
+
+<section id="contact-info" class="section-padding contact-grid-container">
             
-            <div class="booking-widget-area">
-                <a href="#" class="button-primary booking-link">Click Here to Open Online Booking System</a>
-                <p>This link takes you directly to our real-time availability calendar.</p>
-            </div>
-        </section>
+    <div class="contact-form-area">
+    <h3>Send Us a Message</h3>
+    <p>For general questions, collaborations, or partnership inquiries.</p>
 
-        <hr>
+    <form id="contact-form" action="/submit-form" method="POST" class="contact-form">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" required>
 
-        <section id="contact-info" class="section-padding contact-grid-container">
-            
-            <div class="contact-form-area">
-                <h3>Send Us a Message</h3>
-                <p>For general questions, collaborations, or partnership inquiries.</p>
-                
-                <form action="/submit-form" method="POST" class="contact-form">
-                    
-                    <label for="name">Your Name:</label>
-                    <input type="text" id="name" name="name" required>
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" required>
 
-                    <label for="email">Email Address:</label>
-                    <input type="email" id="email" name="email" required>
+        <label for="phone">Phone Number (Optional):</label>
+        <input type="tel" id="phone" name="phone">
 
-                    <label for="phone">Phone Number (Optional):</label>
-                    <input type="tel" id="phone" name="phone">
+        <label for="subject">Subject:</label>
+        <input type="text" id="subject" name="subject">
 
-                    <label for="subject">Subject:</label>
-                    <input type="text" id="subject" name="subject">
+        <label for="message">Your Message:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
 
-                    <label for="message">Your Message:</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
+        <button type="submit" class="button-primary">Send Message</button>
+    </form>
 
-                    <button type="submit" class="button-primary">Send Message</button>
-                </form>
-            </div>
+    <div id="success-message" style="display:none; background-color: #d4edda; color: #155724; padding: 20px; border-radius: 5px; border: 1px solid #c3e6cb; margin-top: 20px; text-align: center;">
+        <h4>Thank You!</h4>
+        <p>Your message has been successfully collected. We'll be in touch soon.</p>
+    </div>
+    </div>
 
             <div class="location-details-area">
                 <h3>Our Studio Location</h3>
@@ -86,10 +110,46 @@
         <div class="footer-content">
             <p>&copy; 2025 The Braid Loft. All rights reserved.</p>
             <div class="social-links">
-                <a href="The Braid Loft">Instagram</a> | <a href="The Braid Loft">Facebook</a> | <a href="The Braid Loft">TikTok</a>
+                <a href="https://www.instagram.com/thebraid_loft?igsh=aHlvMGVrdHBwdHFi&utm_source=qr">Instagram</a> | <a href="The Braid Loft">Facebook</a> | <a href="The Braid Loft">TikTok</a>
             </div>
         </div>
     </footer>
+  <script>
+    
+    const bookingForm = document.getElementById('booking-form');
+    const bookingSuccess = document.getElementById('booking-success');
 
+    bookingForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        bookingForm.style.display = 'none'; 
+        bookingSuccess.style.display = 'block'; 
+    });
+
+    
+    const contactForm = document.getElementById('contact-form');
+    const contactSuccess = document.getElementById('success-message');
+
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        contactForm.style.display = 'none'; 
+        contactSuccess.style.display = 'block'; 
+    });
+</script>
+
+   <script>
+    const form = document.getElementById('contact-form');
+    const successBox = document.getElementById('success-message');
+
+    form.addEventListener('submit', function(e) {
+        
+        e.preventDefault(); 
+        
+        form.style.display = 'none'; 
+        
+        successBox.style.display = 'block'; 
+        
+        successBox.scrollIntoView({ behavior: 'smooth' });
+    });
+</script>
 </body>
 </html>
